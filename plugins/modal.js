@@ -68,6 +68,9 @@ $.modal = (options) => {
       setTimeout(() => {
         $modal.classList.remove('hide');
         closing = false;
+        if (typeof options.onClose === 'function') {
+          options.onClose()
+        }
       }, ANIMATION_SPEED)
     },
   };
@@ -86,7 +89,7 @@ $.modal = (options) => {
       $modal.removeEventListener('click', listener)
       destroyed = true;
     },
-    setContent(html) {
+    setContent(html) { //создание контента для модального окна
       $modal.querySelector('[data-content]').innerHTML = html;
     }
   });
